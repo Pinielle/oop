@@ -1,5 +1,3 @@
-fdasfad
-
 <?php
     class SuperUser {
         protected $prava;
