@@ -1,5 +1,3 @@
-her
-
 <?php
     class SuperUser {
         protected $prava;
