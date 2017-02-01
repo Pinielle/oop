@@ -4,7 +4,7 @@
         function __construct($text,$text2){
             $this->variable =$text.$text2;
         }
-        function show() {
+             function show() {
             return $this->variable;
         }
     }
