@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../bec.inv/.idea/bec.inv.iml" filepath="$PROJECT_DIR$/../bec.inv/.idea/bec.inv.iml" />
       <module fileurl="file://$PROJECT_DIR$/../blog.dev/.idea/blog.dev.iml" filepath="$PROJECT_DIR$/../blog.dev/.idea/blog.dev.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/oop.dev.iml" filepath="$PROJECT_DIR$/.idea/oop.dev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tinymvc.ru/.idea/tinymvc.ru.iml" filepath="$PROJECT_DIR$/../tinymvc.ru/.idea/tinymvc.ru.iml" />
     </modules>
   </component>
 </project>
