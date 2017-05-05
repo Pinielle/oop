@@ -5,6 +5,7 @@
  * Date: 03.05.17
  * Time: 11:35
  */
+require_once 'dbconfig.php';
     class Inventory
     {
         private $conn;
@@ -21,33 +22,72 @@
             return $stmt;
         }
 
-        public function addInventory(
-            $category,$model,$article,$s_number,$price,$owner,$condition,$date,$w_period,$w_end,$comments)
+        public function addInventory($data)
         {
             try
             {
                 $stmt = $this->conn->prepare("INSERT INTO inventory(category, model, article, s_number, 
-		                                      price, owner, condition, date, w_period, w_end, comments) 
+		                                      price, owner, `condition`, date, w_period, w_end, comments) 
 		                                      VALUES(:category, :model, :article, :s_number,
 		                                      :price, :owner, :condition, :date, :w_period, :w_end, :comments)");
 
-                $stmt->bindparam(":category", $category);
-                $stmt->bindparam(":model", $model);
-                $stmt->bindparam(":article", $article);
-                $stmt->bindparam(":s_number", $s_number);
-                $stmt->bindparam(":price", $price);
-                $stmt->bindparam(":owner", $owner);
-                $stmt->bindparam(":condition", $condition);
-                $stmt->bindparam(":date", $date);
-                $stmt->bindparam(":w_period", $w_period);
-                $stmt->bindparam(":w_end", $w_end);
-                $stmt->bindparam(":comments", $comments);
 
+                $stmt->bindparam(":category", $data['category']);
+                $stmt->bindparam(":model", $data['model']);
+                $stmt->bindparam(":article", $data['article']);
+                $stmt->bindparam(":s_number", $data['s_number']);
+                $stmt->bindparam(":price", $data['price']);
+                $stmt->bindparam(":owner", $data['owner']);
+                $stmt->bindparam(":condition", $data['condition']);
+                $stmt->bindparam(":date", $data['date']);
+                $stmt->bindparam(":w_period", $data['w_period']);
+                $stmt->bindparam(":w_end", $data['w_end']);
+                $stmt->bindparam(":comments", $data['comments']);
                 $stmt->execute();
 
                 return $stmt;
             }
             catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function updateInventory($data)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("UPDATE inventory SET
+                                        category = :category,
+                                        model = :model,
+                                        article = :article,
+                                        s_number = :s_number,
+                                        price = :s_number,
+                                        owner = :owner,
+                                        `condition` = :condition,
+                                        `date` = :date,
+                                        w_period = :w_period,
+                                        w_end = :w_end,
+                                        comments = :comments
+                                        WHERE id = :id;
+                                        ");
+
+                $stmt->bindparam(":category", $data['category']);
+                $stmt->bindparam(":model", $data['model']);
+                $stmt->bindparam(":article", $data['article']);
+                $stmt->bindparam(":s_number", $data['s_number']);
+                $stmt->bindparam(":price", $data['price']);
+                $stmt->bindparam(":owner", $data['owner']);
+                $stmt->bindparam(":condition", $data['condition']);
+                $stmt->bindparam(":date", $data['date']);
+                $stmt->bindparam(":w_period", $data['w_period']);
+                $stmt->bindparam(":w_end", $data['w_end']);
+                $stmt->bindparam(":comments", $data['comments']);
+                $stmt->bindparam(":id", $data['id']);
+                $stmt->execute();
+
+                return $stmt;
+            }catch (PDOException $e)
             {
                 echo $e->getMessage();
             }
@@ -63,7 +103,7 @@
             }
             try
             {
-                $stmt = $this->conn->prepare("SELECT * FROM inventory $limit");
+                $stmt = $this->conn->prepare("SELECT INV.*,CAT.title AS category FROM inventory INV LEFT JOIN categories CAT ON INV.category = CAT.id $limit");
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->execute();
                 $allInv = $stmt->fetchAll();
@@ -75,5 +115,31 @@
             return $allInv;
         }
 
+        public function selectInventory($id)
+        {
+            $inventory = '';
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT INV.*,CAT.title AS category FROM inventory INV LEFT JOIN categories CAT ON INV.category = CAT.id WHERE INV.id=:id");
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->bindparam(":id", $id);
+                $stmt->execute();
+                $inventory = $stmt->fetch();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+            return $inventory;
+        }
+
+        public function setData($data)
+        {
+            if (is_array($data)) {
+                foreach ($data as $key => $value) {
+                    $this->{$key} = $value;
+                }
+            }
+        }
 
     }

@@ -1,22 +1,28 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ihor
+ * Date: 05.05.17
+ * Time: 15:52
+ */
 
-require_once("session.php");
+	require_once("session.php");
 
-require_once("class.user.php");
-require_once ("class.inventory.php");
-require_once ("class.catigories.php");
-$auth_user = new USER();
+	require_once("class.user.php");
+	require_once ("class.inventory.php");
+	require_once ("class.catigories.php");
+	$auth_user = new USER();
 
 
-$user_id = $_SESSION['user_session'];
+	$user_id = $_SESSION['user_session'];
 
-$stmt = $auth_user->runQuery("SELECT * FROM users WHERE user_id=:user_id");
-$stmt->execute(array(":user_id"=>$user_id));
+	$stmt = $auth_user->runQuery("SELECT * FROM users WHERE user_id=:user_id");
+	$stmt->execute(array(":user_id"=>$user_id));
 
-$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+	$userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 
-$inventory = new Inventory();
-$categories = new Categories();
+	$inventory = new Inventory();
+	$categories = new Categories();
 
 
 
@@ -78,79 +84,45 @@ $categories = new Categories();
 
         <p class="h4">
         <table class="home_border">
-            <form action="new_inventory.php" method="post">
             <tr>
+                <td>id</td>
                 <td>Category</td>
-                <td>
-                    <select name="category" size="0">
-                        <?php
-
-                        $result = $categories->getAllCategories();
-
-
-                        if (count($result) > 0) {
-                            foreach ($result as $myrow){
-                                printf("<option value='%s'>%s</option>",$myrow["id"],$myrow["title"]);
-                            }
-
-                        }
-                        else {
-                            echo"<p>Информация по запросу не может быть извлечена, в таблице нет записей</p>";
-                            exit();
-                        }
-
-                        ?>
-
-                    </select></td>
-            </tr>
-            <tr>
                 <td>Model</td>
-                <td><input name="model" id="model" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Article</td>
-                <td><input name="article" id="article" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Serial<br>number</td>
-                <td><input name="s_number" id="s_number" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Price</td>
-                <td><input name="price" id="price" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Owner</td>
-                <td><input name="owner" id="owner" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Condition</td>
-                <td><input name="condition" id="condition" type="text"/></td>
-            </tr>
-            <tr>
                 <td>Date</td>
-                <td><input name="date" id="date" type="text" value="<?php $date = date('Y-m-d'); echo $date; ?>"/></td>
-            </tr>
-            <tr>
                 <td>Warranty<br>Period</td>
-                <td><input name="w_period" id="w_period" type="date"/></td>
-            </tr>
-            <tr>
                 <td>Warranty<br>end</td>
-                <td><input name="w_end" id="w_end" type="date"/></td>
-            </tr>
-            <tr>
                 <td>Comment</td>
-                <td><input name="comments" id="comments" type="text"/></td>
+                <td>Action</td>
             </tr>
+            <?php
+            $arr = $inventory->selectInventories();
+            foreach ($arr as $value) {
+                echo "
             <tr>
-                <td colspan="2">
-                <input name="submit" type="submit" value="Add inventory">
-                </td>
+                <td>" . $value['id'] . "</td>
+                <td>" . $value['category'] . "</td>
+                <td>" . $value['model'] . "</td>
+                <td>" . $value['article'] . "</td>
+                <td>" . $value['s_number'] . "</td>
+                <td>" . $value['price'] . "</td>
+                <td>" . $value['owner'] . "</td>
+                <td>" . $value['condition'] . "</td>
+                <td>" . $value['date'] . "</td>
+                <td>" . $value['w_period'] . "</td>
+                <td>" . $value['w_end'] . "</td>
+                <td>" . $value['comments'] . "</td>
+                <td><a href='update_inventory.php?id=" . $value['id'] . "'>Edit</a> 
+                <a href='delete_inventory.php?id=" . $value['id'] . "'>Delete</a></td>
             </tr>
-            </form>
+        ";
+            }
+            ?>
         </table>
-
         </p>
 
         <p class="blockquote-reverse" style="margin-top:200px;">
