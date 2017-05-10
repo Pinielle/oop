@@ -38,8 +38,6 @@
 
         $update = new Inventory();
         $update->updateInventory($data);
-        var_dump($data);
-
-
+        header( 'Location: /all_inventory.php', true, 303 );
 
     }

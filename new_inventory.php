@@ -38,7 +38,6 @@
             'w_end' => $w_end,
             'comments' => $comments
         );
-        //$inventory->setData($data);
 
         $result = $inventory->addInventory($data);
 
@@ -53,3 +52,4 @@
     {
         echo "<p>Федя дичь</p>";
     }
+    header( 'Location: /all_inventory.php', true, 303 );

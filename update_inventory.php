@@ -86,7 +86,7 @@ $valueinventory = $inventory->selectInventory($_REQUEST['id']);
                         <select name="category" size="0">
                             <?php
 
-                            $result = $categories->getAllCategories();
+                            $result = $categories->selectCategories();
 
 
                             if (count($result) > 0) {
@@ -152,7 +152,7 @@ $valueinventory = $inventory->selectInventory($_REQUEST['id']);
                     <td colspan="2">
                         <input name="submit" type="submit" value="Update">
                     </td>
-                    <input name="id" type="hidden" value="<?= $valueinventory['id'] ?>">
+                    <input name="id" type="hidden" value="<?= $valueinventory['id']?>">
                 </tr>
             </form>
         </table>

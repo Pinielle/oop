@@ -70,6 +70,7 @@
             <a href="home.php"><span class="glyphicon"></span> Home</a> &nbsp;
             <a href="add_inventory.php"><span class="glyphicon"></span>Add Inventory</a>
             <a href="all_inventory.php"><span class="glyphicon"></span>All Inventory</a>
+            <a href="all_category.php"><span class="glyphicon"></span>All Category</a>
 
         </h1>
        	<hr />

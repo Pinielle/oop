@@ -5,6 +5,7 @@
  * Date: 03.05.17
  * Time: 16:27
  */
+require_once 'dbconfig.php';
     class Categories
     {
         private $conn;
@@ -16,7 +17,7 @@
             $this->conn = $db;
         }
 
-        public function getAllCategories()
+        public function selectCategories()
         {
             $allCat = '';
             try
@@ -32,5 +33,78 @@
             }
             return $allCat;
 
+        }
+
+        public function selectCategory($id)
+        {
+            $category = '';
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT FROM categories WHERE id=:id");
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->bindparam(":id", $id);
+                $stmt->execute();
+                $category = $stmt->fetch();
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+            return $category;
+        }
+
+        public function addCategory($data)
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("INSERT INTO categories (title) VALUES (:title)");
+
+
+                $stmt->bindparam(":title", $data['title']);
+                $stmt->execute();
+
+
+                return $stmt;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+
+        public function updateCategory($data)
+        {
+            try {
+                $stmt = $this->conn->prepare("UPDATE categories SET
+                                        title = :title
+                                        WHERE id = :id;
+                                        ");
+
+                $stmt->bindparam(":title", $data['title']);
+                $stmt->bindparam(":id", $data['id']);
+                $stmt->execute();
+
+                return $stmt;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        public function deleteCategory($id)
+        {
+            $del = '';
+
+            try {
+                $stmt = $this->conn->prepare("DELETE FROM categories WHERE id=:id");
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->bindParam(":id", $id);
+                $stmt->execute();
+                $del = $stmt->fetch();
+            }
+            catch (PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+            return $del;
         }
     }

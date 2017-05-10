@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: ihor
- * Date: 05.05.17
- * Time: 15:52
+ * Date: 10.05.17
+ * Time: 8:54
  */
-
 	require_once("session.php");
 
 	require_once("class.user.php");
@@ -82,44 +81,40 @@
 
         </h1>
         <hr />
-
+        Add NEW Category<br>
+        <form action="new_category.php" method="post">
+            <input name="title" id="title" type="text"/>
+            <input name="submit" type="submit" value="Add Category">
+        </form>
         <p class="h4">
         <table class="home_border">
             <tr>
                 <td>id</td>
                 <td>Category</td>
-                <td>Model</td>
-                <td>Article</td>
-                <td>Serial<br>number</td>
-                <td>Price</td>
-                <td>Owner</td>
-                <td>Condition</td>
-                <td>Date</td>
-                <td>Warranty<br>Period</td>
-                <td>Warranty<br>end</td>
-                <td>Comment</td>
                 <td>Action</td>
             </tr>
             <?php
-            $arr = $inventory->selectInventories();
+            $arr = $categories->selectCategories();
             foreach ($arr as $value) {
                 echo "
             <tr>
-                <td>" . $value['id'] . "</td>
-                <td>" . $value['category'] . "</td>
-                <td>" . $value['model'] . "</td>
-                <td>" . $value['article'] . "</td>
-                <td>" . $value['s_number'] . "</td>
-                <td>" . $value['price'] . "</td>
-                <td>" . $value['owner'] . "</td>
-                <td>" . $value['condition'] . "</td>
-                <td>" . $value['date'] . "</td>
-                <td>" . $value['w_period'] . "</td>
-                <td>" . $value['w_end'] . "</td>
-                <td>" . $value['comments'] . "</td>
-                <td><a href='update_inventory.php?id=" . $value['id'] . "'>Edit</a> 
-                <a href='delete_inventory.php?id=" . $value['id'] . "'>Delete</a></td>
+                <td colspan=\"3\">
+                    <form action='edit_category.php' method='post'>
+                        <table>
+                            <tr>
+                                <td>" . $value['id'] . "</td>
+                                <td><input name = 'title' value='" . $value['title'] . "'></td>
+                                <td>
+                                    <input type='submit' value='Edit'/>
+                                    <a href='delete_category.php?id=" . $value['id'] . "'>Delete</a>
+                                    <input type='hidden' name='id' value='". $value['id'] . "'>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
             </tr>
+            
         ";
             }
             ?>

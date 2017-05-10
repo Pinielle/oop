@@ -133,13 +133,22 @@ require_once 'dbconfig.php';
             return $inventory;
         }
 
-        public function setData($data)
+        public function deleteInventory($id)
         {
-            if (is_array($data)) {
-                foreach ($data as $key => $value) {
-                    $this->{$key} = $value;
-                }
+            $del = '';
+
+            try {
+                $stmt = $this->conn->prepare("DELETE FROM inventory WHERE id=:id");
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->bindParam(":id", $id);
+                $stmt->execute();
+                $del = $stmt->fetch();
             }
+            catch (PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+            return $del;
         }
 
     }
