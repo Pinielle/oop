@@ -42,7 +42,7 @@ if(isset($_POST['btn-login']))
         
        <form class="form-signin" method="post" id="login-form">
       
-        <h2 class="form-signin-heading">Log In to WebApp.</h2><hr />
+        <h2 class="form-signin-heading">BabenkoECommerce Portal.</h2><hr />
         
         <div id="error">
         <?php

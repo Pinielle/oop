@@ -21,7 +21,7 @@
 
 
     if (isset($category) && isset($model) && isset($article) && isset($s_number) && isset($price) && isset($owner)
-        && isset($condition) && isset($date) && isset($w_period) && isset($w_end) && isset($comments))
+        && isset($condition) && isset($date) && isset($comments))
     {
 
         $inventory = new Inventory();
@@ -34,10 +34,14 @@
             'owner' => $owner,
             'condition' => $condition,
             'date' => $date,
-            'w_period' => $w_period,
-            'w_end' => $w_end,
             'comments' => $comments
         );
+        if (isset($w_end)){
+            $data['w_end'] = $w_end;
+        }
+        if (isset($w_period)){
+            $data['w_period'] = $w_period;
+        }
 
         $result = $inventory->addInventory($data);
 
