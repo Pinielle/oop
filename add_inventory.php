@@ -7,7 +7,7 @@ require_once("blocks/header.php");
         <td>
             <p class="h4">
             <table class="home_border">
-                <form action="new_inventory.php" method="post">
+                <form action="<?php echo $router->getUrl('new_inventory.php'); ?>" method="post">
                     <tr>
                         <td>Category</td>
                         <td>

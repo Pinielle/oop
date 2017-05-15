@@ -73,8 +73,8 @@ chdir($_SERVER['DOCUMENT_ROOT']);
 
     <div class="container">
         <h3>
-            <a href="../home.php"><span class="glyphicon"></span> Home</a> &nbsp;
-            <a href="../add_inventory.php"><span class="glyphicon"></span>Add Inventory</a>
-            <a href="../all_inventory.php"><span class="glyphicon"></span>All Inventory</a>
-            <a href="../all_category.php"><span class="glyphicon"></span>All Category</a>
+            <a href="<?php echo $router->getUrl('home.php'); ?>"><span class="glyphicon"></span> Home</a> &nbsp;
+            <a href="<?php echo $router->getUrl('add_inventory.php'); ?>"><span class="glyphicon"></span>Add Inventory</a>
+            <a href="<?php echo $router->getUrl('all_inventory.php'); ?>"><span class="glyphicon"></span>All Inventory</a>
+            <a href="<?php echo $router->getUrl('all_category.php'); ?>"><span class="glyphicon"></span>All Category</a>
         </h3>

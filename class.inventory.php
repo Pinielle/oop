@@ -6,10 +6,10 @@
  * Time: 11:35
  */
 require_once 'dbconfig.php';
-
-class Inventory
+require_once 'corecollection.php';
+class Inventory extends CoreCollection
 {
-    private $conn;
+    public $conn;
 
     public function __construct()
     {
@@ -90,9 +90,8 @@ class Inventory
         }
     }
 
-    public function selectInventories($options = array())
+    public function selectCollectionsSQL($options = array())
     {
-        $allInv = array();
         $limit = '';
         $where = 'where 1';
         if (isset($options['limit'])) {
@@ -113,8 +112,15 @@ class Inventory
         if (isset($options['cat_id'])){
             $where .= $this->conn->prepare(" and CAT.id =" . $options['cat_id'])->queryString;
         }
+        $stmt = $this->conn->prepare("SELECT INV.*,CAT.title AS category FROM inventory INV LEFT JOIN categories CAT ON INV.category = CAT.id $where $limit");
+        return $stmt->queryString;
+    }
+
+    public function selectInventories($options = array())
+    {
+        $allInv = array();
+        $stmt = $this->conn->query($this->selectCollectionsSQL($options));
         try {
-            $stmt = $this->conn->prepare("SELECT INV.*,CAT.title AS category FROM inventory INV LEFT JOIN categories CAT ON INV.category = CAT.id $where $limit");
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->execute();
             $allInv = $stmt->fetchAll();
@@ -123,6 +129,7 @@ class Inventory
         }
         return $allInv;
     }
+
 
     public function selectInventory($id)
     {

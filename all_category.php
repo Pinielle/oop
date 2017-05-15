@@ -2,8 +2,7 @@
 ?>
 <table>
     <td valign="top"><?php require_once 'blocks/left_sb.php' ?></td>
-    <td>
-        <h1>Categories</h1>
+    <td valign="top">
         Add NEW Category<br>
         <form action="new_category.php" method="post">
             <input name="title" id="title" type="text"/>

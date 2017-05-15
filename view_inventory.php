@@ -14,7 +14,6 @@
                 <td>Comment</td>
             </tr>
             <?php
-
             foreach ($arr as $value) {
                 echo "
             <tr>
@@ -31,7 +30,6 @@
                 <td>" . date('Y-m-d',strtotime($value['w_end'])) . "</td>
                 <td> <a href='update_inventory.php?id=" . $value['id'] . "'>Edit</a> 
                 <a href='delete_inventory.php?id=" . $value['id'] . "'>Delete</a></td>
-
             </tr>
         ";
             }

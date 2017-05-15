@@ -56,4 +56,4 @@
     {
         echo "<p>Федя дичь</p>";
     }
-    header( 'Location: /all_inventory.php', true, 303 );
+    header( 'Location: /' . $router->getUrl('all_inventory.php') . ', true, 303' );
