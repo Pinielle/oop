@@ -11,7 +11,7 @@ $arr = $inventory->selectInventories($options);
 
 ?>
     <table>
-        <td><?php require_once 'blocks/left_sb.php' ?></td>
+        <td valign="top"><?php require_once 'blocks/left_sb.php' ?></td>
         <td>
             <?php require_once 'view_inventory.php'?>
         </td>

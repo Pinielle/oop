@@ -29,7 +29,9 @@
                 <td>" . date('Y-m-d',strtotime($value['date'])) . "</td>
                 <td>" . date('Y-m-d',strtotime($value['w_period'])) . "</td>
                 <td>" . date('Y-m-d',strtotime($value['w_end'])) . "</td>
-                <td>" . $value['comments'] . "</td>
+                <td> <a href='update_inventory.php?id=" . $value['id'] . "'>Edit</a> 
+                <a href='delete_inventory.php?id=" . $value['id'] . "'>Delete</a></td>
+
             </tr>
         ";
             }

@@ -1,7 +1,7 @@
 <?php require_once 'blocks/header.php';
 ?>
 <table>
-    <td><?php require_once 'blocks/left_sb.php' ?></td>
+    <td valign="top"><?php require_once 'blocks/left_sb.php' ?></td>
     <td>
         <h1>Categories</h1>
         Add NEW Category<br>

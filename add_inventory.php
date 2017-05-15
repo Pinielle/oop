@@ -3,7 +3,7 @@
 require_once("blocks/header.php");
 ?>
     <table>
-        <td><?php require_once 'blocks/left_sb.php' ?></td>
+        <td valign="top"><?php require_once 'blocks/left_sb.php' ?></td>
         <td>
             <p class="h4">
             <table class="home_border">

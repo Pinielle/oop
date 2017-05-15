@@ -3,7 +3,7 @@
     $arr = $inventory->selectInventories(array('limit'=>'5'));
 ?>
 <table>
-    <td>
+    <td valign="top">
         <?php require_once 'blocks/left_sb.php'?>
     </td>
     <td>
