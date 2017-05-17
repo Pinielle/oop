@@ -76,6 +76,7 @@ class USER
 		{
 			return true;
 		}
+		return false;
 	}
 	
 	public function redirect($url)

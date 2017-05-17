@@ -10,12 +10,13 @@ require_once("session.php");
 require_once("class.user.php");
 require_once ("class.inventory.php");
 require_once ("class.catigories.php");
+require_once ("class.router.php");
 $result = $categories->selectCategories();
-
+$router = new Router();
 
 if (count($result) > 0) {
     foreach ($result as $myrow){
-        printf("<a href='all_inventory.php?cat_id=%s'>%s</a><br>",$myrow["id"],$myrow["title"]);
+        printf("<a href='" . $router->getUrl('all_inventory.php') . "?cat_id=%s'>%s</a><br>",$myrow["id"],$myrow["title"]);
     }
 
 }
