@@ -1,7 +1,7 @@
 <?php
 class paginate
 {
-    public $per_page = 3;
+    public $per_page = 20;
     private $db;
     public $query;
 
@@ -36,8 +36,7 @@ class paginate
     public function paginglink()
     {
 
-        $self = $_SERVER['PHP_SELF'];
-
+        $self = $_SERVER['REDIRECT_URL'];
         $stmt = $this->db->prepare($this->query);
         $stmt->execute();
 

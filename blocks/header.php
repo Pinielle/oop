@@ -8,22 +8,11 @@
 
 chdir($_SERVER['DOCUMENT_ROOT']);
 
-	require_once("session.php");
     require_once("class.user.php");
 	require_once ("class.inventory.php");
 	require_once ("class.catigories.php");
 	require_once ("class.router.php");
 
-	$auth_user = new USER();
-
-    if(isset($_SESSION['user_session'])) {
-        $user_id = $_SESSION['user_session'];
-
-        $stmt = $auth_user->runQuery("SELECT * FROM users WHERE user_id=:user_id");
-        $stmt->execute(array(":user_id" => $user_id));
-
-        $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 	$inventory = new Inventory();
 	$categories = new Categories();
 	$router = new Router();
@@ -60,9 +49,9 @@ chdir($_SERVER['DOCUMENT_ROOT']);
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;Hi' <?php echo (isset($userRow['user_email']))?:"guest"; ?>&nbsp;<span class="caret"></span></a>
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;Hi' <?php echo (isset($userRow['user_name']))?$userRow['user_name']:"guest"; ?>&nbsp;<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign Out</a></li>
+                        <li><a href="../index.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign Out</a></li>
                     </ul>
                 </li>
             </ul>

@@ -6,7 +6,7 @@
  * Time: 9:20
  */
 chdir($_SERVER['DOCUMENT_ROOT']);
-require_once("session.php");
+
 require_once("class.user.php");
 require_once ("class.inventory.php");
 require_once ("class.catigories.php");
