@@ -18,7 +18,6 @@ if (count($result) > 0) {
     foreach ($result as $myrow){
         printf("<a href='" . $router->getUrl('all_inventory.php') . "?cat_id=%s'>%s</a><br>",$myrow["id"],$myrow["title"]);
     }
-
 }
 else {
     echo"<p>Информация по запросу не может быть извлечена, в таблице нет записей</p>";

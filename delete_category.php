@@ -14,5 +14,5 @@
 
         $delete = new Categories();
         $delete->deleteCategory($id);
-        header( 'Location: /all_category.php', true, 303 );
+        header( 'Location: /all_category', true, 303 );
     }

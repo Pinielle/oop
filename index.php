@@ -13,7 +13,7 @@ if (isset($_POST['btn-login'])){
 
 if(isset($_GET['logout']) && $_GET['logout']=="true"){
     $login->doLogout();
-    $login->redirect('index.php');
+    $login->redirect('home');
 }
 if (!isset($_SESSION['user_session'])){
     require_once 'login.php';die;
@@ -25,9 +25,6 @@ if (!isset($_SESSION['user_session'])){
 
     $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
 }
-
-
-
 
 $pas = 'home';
 

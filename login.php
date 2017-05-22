@@ -56,7 +56,7 @@ $login = new USER();
                 </button>
             </div>
             <br />
-            <label>Don't have account yet ! <a href="sign-up.php">Sign Up</a></label>
+            <label>Don't have account yet ! <a href="sign-up">Sign Up</a></label>
         </form>
 
     </div>

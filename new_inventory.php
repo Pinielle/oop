@@ -19,7 +19,6 @@
     if (isset($_POST['w_end']))          {$w_end = $_POST['w_end'];         if ($w_end == '') {unset($w_end);}}
     if (isset($_POST['comments']))       {$comments = $_POST['comments'];   if ($comments == '') {unset($comments);}}
 
-
     if (isset($category) && isset($model) && isset($article) && isset($s_number) && isset($price) && isset($owner)
         && isset($condition) && isset($date) && isset($comments))
     {
@@ -56,4 +55,5 @@
     {
         echo "<p>Федя дичь</p>";
     }
-    header( 'Location: /' . $router->getUrl('all_inventory.php') . ', true, 303' );
+
+    header( 'Location: /' . $router->getUrl('all_inventory.php'));

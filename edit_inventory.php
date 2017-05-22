@@ -5,6 +5,7 @@
  * Date: 05.05.17
  * Time: 16:41
  */
+
     require_once 'class.inventory.php';
     if (isset($_POST['category']))       {$data['category'] = $_POST['category'];
     if ($data['category'] == '') {unset($data['category']);}}
@@ -32,12 +33,18 @@
 
     if (isset($data['category']) && isset($data['model']) && isset($data['article']) && isset($data['s_number'])
         && isset($data['price']) && isset($data['owner'])
-        && isset($data['condition']) && isset($data['date']) && isset($data['w_period']) && isset($data['w_end'])
-        && isset($data['comments'])){
+        && isset($data['condition']) && isset($data['date']) && isset($data['comments'])){
 
+        if (isset($w_end)){
+            $data['w_end'] = $w_end;
+        }
+        if (isset($w_period)){
+            $data['w_period'] = $w_period;
+        }
 
         $update = new Inventory();
         $update->updateInventory($data);
-        header( 'Location: /all_inventory', true, 303 );
+
+        header( 'Location: /all_inventory');
 
     }

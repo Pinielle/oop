@@ -6,7 +6,7 @@ $valueinventory = $inventory->selectInventory($_REQUEST['id']);
 ?>
         <p class="h4">
         <table class="home_border">
-            <form action="edit_inventory.php" method="post">
+            <form action="edit_inventory" method="post">
                 <tr>
                     <td>Category</td>
                     <td>
@@ -64,12 +64,16 @@ $valueinventory = $inventory->selectInventory($_REQUEST['id']);
                 <tr>
                     <td>Warranty<br>Period</td>
                     <td><input name="w_period" id="w_period" type="date"
-                               value="<?= date('Y-m-d', strtotime($valueinventory['w_period']))?>"/></td>
+                               value="<?php
+                               if ($valueinventory['w_period']){
+                               echo date('Y-m-d', strtotime($valueinventory['w_period']));} ?>"/></td>
                 </tr>
                 <tr>
                     <td>Warranty<br>end</td>
                     <td><input name="w_end" id="w_end" type="date"
-                               value="<?= date('Y-m-d', strtotime($valueinventory['w_end']))?>"/></td>
+                               value="<?php
+                               if ($valueinventory['w_end']){
+                               echo date('Y-m-d', strtotime($valueinventory['w_end']));}?>"/></td>
                 </tr>
                 <tr>
                     <td>Comment</td>

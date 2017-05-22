@@ -14,6 +14,7 @@
                 <td>Comment</td>
             </tr>
             <?php
+            if (isset($arr)){
             foreach ($arr as $value) {
                 echo "
             <tr>
@@ -26,12 +27,18 @@
                 <td>" . $value['owner'] . "</td>
                 <td>" . $value['condition'] . "</td>
                 <td>" . date('Y-m-d',strtotime($value['date'])) . "</td>
-                <td>" . date('Y-m-d',strtotime($value['w_period'])) . "</td>
-                <td>" . date('Y-m-d',strtotime($value['w_end'])) . "</td>
+                <td>" ;
+                    if ($value['w_period']){
+                    echo date('Y-m-d',strtotime($value['w_period']));}
+                    echo "</td>
+                <td>";
+                    if ($value['w_end']){
+                    echo date('Y-m-d',strtotime($value['w_end']));}
+                    echo "</td>
                 <td> <a href='update_inventory?id=" . $value['id'] . "'>Edit</a> 
                 <a href='delete_inventory?id=" . $value['id'] . "'>Delete</a></td>
             </tr>
-        ";
+        ";}
             }
             ?>
 </table>

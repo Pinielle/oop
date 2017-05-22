@@ -83,7 +83,6 @@ class Inventory extends CoreCollection
             $stmt->bindparam(":comments", $data['comments']);
             $stmt->bindparam(":id", $data['id']);
             $stmt->execute();
-
             return $stmt;
         } catch (PDOException $e) {
             echo $e->getMessage();

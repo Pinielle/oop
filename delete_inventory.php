@@ -14,5 +14,5 @@
 
         $delete = new Inventory();
         $delete->deleteInventory($id);
-        header( 'Location: /all_inventory.php', true, 303 );
+        header( 'Location: /all_inventory', true, 303 );
     }
